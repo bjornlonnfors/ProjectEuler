@@ -3,10 +3,17 @@
   */
 object ProjectEulerTest extends App {
 
-  val a = ProjectEuler.multipleSum(3,1000)
-  val b = ProjectEuler.multipleSum(5,1000)
-  val c = ProjectEuler.sameNumbersSum(a,b)
+
+  // Problem 1
+
+  val a = ProjectEuler.multiple(3,1000)
+  val b = ProjectEuler.multiple(5,1000)
+  val c = ProjectEuler.sameNumbers(a,b)
   println(a.sum + b.sum - c.sum)
+
+  // Problem 2
+
+  println(ProjectEuler.fibonacci(4000000))
 
 
 
