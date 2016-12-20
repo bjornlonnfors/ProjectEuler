@@ -21,5 +21,12 @@ object ProjectEulerTest extends App {
   println(ProjectEuler.largestPrimeFactor(600851475143L))
 
 
+  // Problem 4
+
+
+
+ println(ProjectEuler.testPalindrome(998001))
+
+
 
 }

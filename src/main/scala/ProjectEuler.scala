@@ -2,6 +2,7 @@
   * Created by bjornlonnfors on 20/12/16.
   */
 import scala.collection.mutable._
+import util.control.Breaks._
 
 object ProjectEuler {
 
@@ -11,9 +12,9 @@ object ProjectEuler {
 
   /**
     * Takes all the multiples of a number with given restraint and places them in a vector
-    * @param num
-    * @param res
-    * @return
+    * @param num multiples of wich number
+    * @param res until what number do you want the multiples
+    * @return all the multiples in a vector
     */
 
   def multiple(num: Int, res: Int) = {
@@ -32,7 +33,7 @@ object ProjectEuler {
     * Takes two(2) vectors and removes the repeat.
     * @param vec1
     * @param vec2
-    * @return
+    * @return a vector with all the number that occur twice
     */
 
   def sameNumbers(vec1: Vector[Int], vec2: Vector[Int]): Vector[Int] = {
@@ -94,18 +95,54 @@ object ProjectEuler {
   }
 
 
+  // Problem 4
+
+  // Find the largest palindrome made from the product of two 3-digit numbers.
+
+  /**
+    * Checks if the number is a palindrome recursively
+    * @param number takes a number in form of a string
+    * @return Boolean
+    */
+
+
+  def palindrome(number: String): Boolean = {
+
+
+    if(number.length <= 1) true
+
+    else if (number(0) == number.last) palindrome(number.slice(1,number.length - 1))
+
+    else false
+
+
+  }
+
+  /**
+    * Finds the largest palindrome that is a product of 2 3 - digit number
+    * @param number useless
+    * @return Int
+    */
 
 
 
+  def testPalindrome(number: Int): Int = {
+
+    var stop  = Buffer[Int]()
 
 
+    breakable {
+    for (a <- 100 to 999; b <- 100 to 999) {
+      if (ProjectEuler.palindrome((a * b).toString)) {
+        stop += a * b
 
+      }
 
+      }
+    }
 
-
-
-
-
+    stop.sorted.last
+  }
 
 
 
