@@ -7,6 +7,8 @@ object ProjectEuler {
 
   //Problem 1:
 
+
+
   /**
     * Takes all the multiples of a number with given restraint and places them in a vector
     * @param num
@@ -69,6 +71,26 @@ object ProjectEuler {
     fibo.dropRight(1).filter(_ % 2 == 0).sum
 
 
+  }
+
+
+  // Problem 3:
+
+
+  // What is the largest prime factor of the number 600851475143 ?
+
+
+  def largestPrimeFactor(b : BigInt) = {
+
+    def loop(f:BigInt, n: BigInt): BigInt = {
+
+      if (f == n) n
+
+      else if (n % f == 0) loop(f, n / f)
+
+      else loop(f + 1, n)
+    }
+    loop (BigInt(2), b)
   }
 
 

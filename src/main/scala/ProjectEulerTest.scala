@@ -16,5 +16,10 @@ object ProjectEulerTest extends App {
   println(ProjectEuler.fibonacci(4000000))
 
 
+  // Problem 3
+
+  println(ProjectEuler.largestPrimeFactor(600851475143L))
+
+
 
 }
