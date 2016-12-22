@@ -28,5 +28,12 @@ object ProjectEulerTest extends App {
  println(ProjectEuler.testPalindrome(998001))
 
 
+  // Problem 5
+
+ // ProjectEuler.divisible(20).foreach(println)
+
+ println(ProjectEuler.divisible(20))
+
+
 
 }

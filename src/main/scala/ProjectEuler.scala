@@ -3,6 +3,7 @@
   */
 import scala.collection.mutable._
 import util.control.Breaks._
+import scala.math._
 
 object ProjectEuler {
 
@@ -81,6 +82,8 @@ object ProjectEuler {
   // What is the largest prime factor of the number 600851475143 ?
 
 
+
+
   def largestPrimeFactor(b : BigInt) = {
 
     def loop(f:BigInt, n: BigInt): BigInt = {
@@ -128,12 +131,14 @@ object ProjectEuler {
 
   def testPalindrome(number: Int): Int = {
 
-    var stop  = Buffer[Int]()
+    val stop  = Buffer[Int]()
 
 
     breakable {
     for (a <- 100 to 999; b <- 100 to 999) {
+
       if (ProjectEuler.palindrome((a * b).toString)) {
+
         stop += a * b
 
       }
@@ -143,6 +148,78 @@ object ProjectEuler {
 
     stop.sorted.last
   }
+
+
+  // Problem 5:
+
+  // What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+
+  // Brute force
+
+  /**
+    * Checks if a certain number is a prime
+    * @param n Checks if this number is a prime
+    * @return Boolean
+    */
+
+  def isPrime(n: Int) = (2 until n).forall(n % _ != 0) // Takes modulus of all number from 2 until the number wich is checked. If all is not == 0 then it's a prime
+
+  def findPrime(res: Int): Vector[Int] = {
+    val resultBuffer = Buffer[Int]()
+
+    for(a <- 3 to res){
+      if(isPrime(a)) resultBuffer += a
+    }
+    resultBuffer.toVector
+  }
+
+  /**
+    * Finds all the ??Exponentials?? of a certain number until a certain number,ex whatnum = 2 and untilWhat = 20, returns Vector(2,4,8,16)
+    * @param whatnum Wich number exponentials do you want
+    * @param untilWhat Until what number do you want your exponentials
+    * @return Vector
+    */
+
+  def findPotens(whatnum: Int,untilWhat: Int): Vector[Int] = {
+    val findBuffer = Buffer(whatnum)
+
+
+    while(findBuffer.last < untilWhat){
+      findBuffer += findBuffer.last * whatnum
+    }
+    findBuffer.dropRight(1).toVector
+  }
+
+
+  /**
+    * Finds the smallest possible number that has % == 0 from 1 to res. Does this by taking all the primes and the highest exponential of all numbers
+    * @param res 1 to what
+    * @return Int
+    */
+
+  def divisible(res: Int): Int = {
+    val endVector = findPrime(res).toBuffer
+
+    for(a <- 2 to sqrt(res).toInt){
+      endVector += findPotens(a,res).sorted.last
+    }
+
+    endVector.sorted.distinct
+
+    for(a <- 2 to sqrt(res).toInt){
+      for(b <- findPotens(a,res).dropRight(1)){
+        if(endVector.contains(b)) endVector.remove(endVector.indexOf(b))
+
+      }
+    }
+
+
+
+    endVector.sorted.distinct.product
+
+
+  }
+
 
 
 
